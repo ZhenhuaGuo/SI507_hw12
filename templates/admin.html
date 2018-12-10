@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <h1> Welcome to my guestbook! </h1>
+
+    <p><a href="/add">Add a message</a></p>
+
+    {% for e in entries %}
+    <div class="entry">
+        <p class="entrytext"> {{e['text']}} </p>
+        <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
+        <p class="metadata"> id: {{e['id']}}</p>
+        <form action="/change" method="POST">
+            <textarea name="update" value=""></textarea>
+            <input type="hidden" name="id" value="{{e['id']}}">
+            <input type="submit" value="change"/>
+        </form>
+        <form action="/delete" method="POST">
+            <input type="submit" value="X"/>
+            <input type="hidden" name="id" value="{{e['id']}}">
+        </form>
+    </div>
+    {% endfor %}
+
+
+</body>
+
+</html>
